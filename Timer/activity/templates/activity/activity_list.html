@@ -1,0 +1,35 @@
+{% extends 'activity/base.html' %}
+
+{% block title %}Activities{% endblock %}
+
+{% block body %}
+<h1><a href="{% url 'activity:add' %}">My Activities</a></h1>
+<hr>
+<p class="detail">Welcome to your dashboard. You can <a href="{% url 'account:edit' %}">edit your account</a>
+    or <a href="{% url 'password_change' %}">change your password.</a>
+</p>
+<br>
+<a href="{% url 'activity:add' %}"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add Activity</a>
+<table class="table table-bordered" style="margin-top:10px">
+    <thead>
+    <tr>
+        <th>Activity</th>
+        <th>Date</th>
+        <th>Duration</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for activity in activities %}
+    <tr>
+        <td>{{activity.activity}}</td>
+        <td>{{activity.date}}</td>
+        <td>{{activity.duration}}</td>
+        <td><a href="{% url 'activity:delete' activity.id %}"><span data-toggle="tooltip" title="Delete this activity" class="glyphicon glyphicon-trash"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url 'activity:edit' activity.id %}"><span data-toggle="tooltip" title="Edit this activity" class="glyphicon glyphicon-edit"></span></a> </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}
